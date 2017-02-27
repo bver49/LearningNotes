@@ -1,7 +1,5 @@
 # JS筆記
-
 ## 立即函數
-
 在許多框架的原始碼中常常看見這種寫法，函數會在啟動時立刻執行，優點是可以不用擔心污染全域變數，變數生命週期只存在於函數內
 
 寫法如下：
@@ -19,7 +17,6 @@
   console.log(word);  //Hi
 })("Hi");
 ```
-
 
 ## Promise
 簡單的promise範例，模擬取得post在找到對應的user的情況，不使用promise的結果如下：
@@ -99,4 +96,81 @@ getPosts().then(function(posts){
   .then(function (users) {
     console.log(users);
   });
+```
+
+## Prototype
+prototype 只存在於 constructor function ，
+
+ **proto** 則是出現在所有 object 上
+
+### 創建類別不用使用 new 的做法
+範例中創建一個 Counter 類別，有兩個屬性 num1 與 num2，
+
+然後有一個 method sum 用來計算兩個數字的總和，
+
+將 Counter 寫成一般函數，實際創建類別的為 Counter.init，
+
+但是相關的 method 是綁在 Counter 上而非 Counter.init，
+
+所以將 Counter.init 的 prototype 設為 Counter 的 prototype
+
+```javascript
+var Counter = function (num1,num2) {
+  return new Counter.init(num1,num2);
+}
+
+Counter.prototype = {
+  'sum': function () {
+    console.log(this.num1+this.num2);
+  }
+}
+
+Counter.init = function (num1,num2) {
+  this.num1 = num1;
+  this.num2 = num2;
+}
+
+Counter.init.prototype = Counter.prototype;
+
+Counter(1,2).sum(); // 3
+```
+
+## Class
+類似物件導向語言的class語法，基本的寫法：
+
+```javascript
+class Person {
+  //constructor
+  constructor(name) {
+    this.name = name;
+  }
+  //method
+  say() {
+    console.log("My name is " + this.name);
+  }
+}
+
+var student = new Person("Derek");
+
+student.say(); //My name is Derek
+```
+
+繼承的做法：
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  getA() {return this.a}
+}
+class Student extends Person {
+  constructor(name,grade) {
+    super(name);
+    this.grade = grade;
+  }
+  say(){
+    console.log("Hi my name is " + this.name + "\nI'm in " + this.grade + " grade!");
+  }
+}
 ```
