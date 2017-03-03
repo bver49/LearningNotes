@@ -101,7 +101,7 @@ getPosts().then(function(posts){
 ## Prototype
 prototype 只存在於 constructor function ，
 
- **proto** 則是出現在所有 object 上
+\__proto\__ 則是出現在所有 object 上
 
 ### 創建類別不用使用 new 的做法
 範例中創建一個 Counter 類別，有兩個屬性 num1 與 num2，
@@ -173,4 +173,13 @@ class Student extends Person {
     console.log("Hi my name is " + this.name + "\nI'm in " + this.grade + " grade!");
   }
 }
+```
+
+## Template string
+
+在字串中插入變數，字串須使用｀包起來
+
+```javascript
+var num = 2;
+console.log(`Number ${ num }`); // Number 2
 ```
