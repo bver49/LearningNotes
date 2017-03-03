@@ -29,6 +29,8 @@ http {
 
 ### 設定 proxy server
 
+在 /etc/nginx/conf.d/ 創立一個自己的 config 檔案
+
 以下範例的情況為，讓 nginx 監聽 80 port，假如 url 為 www.example.com 則導向 server 的 3000 port
 
 ```sh  
@@ -37,7 +39,7 @@ server {
   listen 80;
   server_name www.example.com;
   location / {
-    proxy_pass 127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:3000;
   }
 }
 ```
@@ -53,7 +55,7 @@ server {
   server_name www.example.com example.com;
 
   location / {
-    proxy_pass 127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:3000;
   }
 
 }
@@ -65,7 +67,7 @@ server {
   server_name api.example.com;
 
   location / {
-    proxy_pass 127.0.0.1:8080;
+    proxy_pass http://127.0.0.1:8080;
   }
 
 }
@@ -82,7 +84,7 @@ server {
   server_name www.example1.com example1.com;
 
   location / {
-    proxy_pass 127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:3000;
   }
 
 }
@@ -94,7 +96,7 @@ server {
   server_name www.example2.com example2.com;
 
   location / {
-    proxy_pass 127.0.0.1:8080;
+    proxy_pass http://127.0.0.1:8080;
   }
 
 }
