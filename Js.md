@@ -1,4 +1,55 @@
 # JS筆記
+
+## 不使用node prefix 執行 nodejs 程式
+
+建立一個mycli.js檔案，內容為
+
+```js
+console.log("Hi");
+//Hi
+```
+
+一般要執行nodejs程式時需要輸入
+
+```bash
+node mycli.js
+```
+
+為了可以不使用node prefix我們需要在檔案最一開始加入 <code>#! /usr/bin/env node</code>
+
+```js
+#! /usr/bin/env node
+console.log("Hi");
+```
+
+然後往們創立一個bin資料夾，然後將程式移入，接著在 package.json 中加入 bin 選項
+
+```json
+{
+  ...
+  "bin": {
+    "mycli": "./bin/mycli.js"
+  }
+  ...
+}
+```
+
+我們設定執行<code>mycli</code>時執行<code>./bin/mycli.js</code>
+
+接著執行
+
+```sh
+npm link
+```
+
+現在試試看執行
+
+```sh
+mycli
+```
+
+就可以看到輸出 mycli.js的執行內容
+
 ## 立即函數
 在許多框架的原始碼中常常看見這種寫法，函數會在啟動時立刻執行，優點是可以不用擔心污染全域變數，變數生命週期只存在於函數內
 
