@@ -40,28 +40,29 @@
 
 一間在做精準廣告投放的公司。
 
-1. 何謂MVC，為何要MVC?
-2. 河內塔演算法?
-3. process跟thread差別?
-4. Node.js中資料儲存的記憶體使用差異?
-5. 為何選用 Nginx 做 proxy server，有考慮過其他的嗎?
-6. Nginx怎麼做load balance?
+1. 何謂MVC，為何要MVC？
+2. 河內塔演算法？
+3. process跟thread差別？
+4. Node.js中資料儲存的記憶體使用差異？
+5. 為何選用 Nginx 做 proxy server，有考慮過其他的嗎？
+6. Nginx怎麼做load balance？
 7. Server side render 和 client side render 差異，瀏覽量大的網站你會選擇哪一種？為什麼？
-8. 常用的ES6語法，使用過的promise模組?
+8. 常用的ES6語法，使用過的promise模組？
 
 ## 玩運彩
 
 一個經營運彩討論區的公司，還有運動賽事的預測跟即時比分等服務。
 
-1. 何謂RWD，怎麼做RWD?
-2. 何謂MVC?
-3. 何謂 Restful，如果要實作刪除一本書的功能，API該怎麼設計?
-4. http動詞get和post的差別?
-5. 何謂SQL injection 如何避免?
-6. 若使用者輸入的資料一定要使用 MySQL 的註解字元或其他特殊字元該怎麼處理?
+1. 何謂RWD，怎麼做RWD？
+2. 何謂MVC？
+3. 何謂 Restful，如果要實作刪除一本書的功能，API該怎麼設計？
+4. http動詞get和post的差別？
+5. 何謂SQL injection 如何避免？
+6. 若使用者輸入的資料一定要使用 MySQL 的註解字元或其他特殊字元該怎麼處理？
 7. cookie跟session差別？
 8. 何時用cookie何時用session？
 9. 清掉cookie後session是否還會在？為何？
+10. 何謂 DOM，何謂 virtual DOM？
 
 ## Tappay
 
