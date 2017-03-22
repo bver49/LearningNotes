@@ -14,8 +14,9 @@
 
 1. JS 中 何謂 bubble event？
 2. JS 中 call 和 apply 差別？
-3. 何謂 long polling？
-4. 何種專案用 Node.js 何種情況用 rails ?為甚麼?
+3. 知不知道Node.js 中 Socket 如何使用？
+4. 何謂 long polling？
+5. 何種專案用 Node.js 何種情況用 rails ?為甚麼?
 
 ## Prenetics
 
