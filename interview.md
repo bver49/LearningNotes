@@ -79,3 +79,31 @@
 ## Tappay
 
 一間在做行動支付的公司，在橋面試時間時發現我還沒有畢業，他們急需可以在3-4月上工的人，所以就先婉拒。
+
+## Kloudless
+
+讓開發者能迅速串接api服務
+面試透過skype，總共約2.5小時，全程使用英文
+
+1. Get 與 Post 差別
+2. cookie / session storage / local storage 三者差別，還有什麼情況會使用哪一種？
+3. 何謂 mvc mvp mvvn ?
+4. url 說明，給一段url並說明各個部分的意思
+5. SQL說明，給一段SQL並說明產生的結果
+6. 使用git 開分支指令
+7. 使用git 提交修改的部分
+8. 使用git 取得遠端伺服器的新資料
+9. linux指令說明(top scp diff grep chmod ln)
+10. SQL中 left join , inner join 差別
+11. 何謂 event bubbling
+12. JS中的this代表什麼
+13. 何謂CI
+14. DNS，何謂 cname
+15. 有沒有使用過 html css js preprocesser
+16. vue / react / angular 使用的經驗
+17. android 以及 ios APP 開發經驗
+18. 使用python的經驗
+19. 何謂rest
+20. 使用過的es6語法
+21. 何謂 High availability 還有 upertime
+
