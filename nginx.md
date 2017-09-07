@@ -100,3 +100,23 @@ server {
   }
 
 }
+```
+
+## 負載平衡
+
+nginx config
+
+```sh
+upstream server{
+  server 192.168.60.1:80        //主機A的位置
+  server 192.168.60.2:80        //主機B的位置
+}
+
+server{
+  listen 80; 
+  server_name  domain.com;      //網站的網域名稱
+  location / {
+     proxy_pass http://server;   //設定的upstream
+  }
+}
+```
