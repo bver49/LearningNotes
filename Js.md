@@ -370,3 +370,58 @@ say()
 require("./module");
 
 ```
+
+## 模組化
+
+### 模組匯出
+
+```js
+(function () {
+    var newModule = {},
+    privateVar = 1;
+    function privateMethod() {
+    }
+    newModule.moduleProperty = 1;
+    newModule.moduleMethod = function () {
+    };
+    module.exports = newModule;
+}());
+```
+
+```js
+var newModule = require("./newModule");
+newModule.moduleMethod();
+```
+
+### 物件擴充
+
+```js
+(function(factory){
+    module.exports = factory;
+}(function(scope){
+    scope.say = function(){
+        console.log("Hi");
+    }
+}));
+```
+
+```js
+var person = {}
+require("./module")(person);
+person.say();
+```
+
+### 引入類別
+
+ ```js
+(function(factory){
+    module.exports = factory;
+}(function(name){
+    this.name = name;
+}));
+```
+
+```js
+var Person = require("./Person");
+var me = new Person("Derek");
+```
