@@ -425,3 +425,11 @@ person.say();
 var Person = require("./Person");
 var me = new Person("Derek");
 ```
+
+## Express send staticfile
+
+```js
+res.sendFile(path.join(__dirname+'/index.html'));  
+res.sendFile("index.html",{root: __dirname });
+app.use("/",express.static(__dirname));
+```
