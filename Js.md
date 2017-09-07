@@ -22,7 +22,7 @@ node mycli.js
 console.log("Hi");
 ```
 
-然後往們創立一個bin資料夾，然後將程式移入，接著在 package.json 中加入 bin 選項
+然後創立一個bin資料夾，然後將程式移入，接著在 package.json 中加入 bin 選項
 
 ```json
 {
