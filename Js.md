@@ -311,3 +311,62 @@ Counter.init.prototype = Counter.prototype;
 Counter(1,2).sum(); // 3
 
 ```
+
+## exports 和 module exports
+
+```js
+
+//A
+
+module.exports = function(){
+  console.log("hi");
+};
+
+var person = require("./module");
+person();
+
+//B
+
+exports.say = function(){
+  console.log("hi");
+};
+
+var person = require("./module");
+person.say();
+
+//C
+
+module.exports.say = function(){
+  console.log("hi");
+};
+
+var person = require("./module");
+person.say();
+
+//D
+
+module.exports = {
+  say : function(){
+    console.log("hi");
+  }
+};
+
+var person = require("./module");
+person.say();
+
+//E
+
+function say(){
+  console.log("hi");
+}
+say()
+
+//Or
+
+(function(){
+    console.log("hi");
+}());
+
+require("./module");
+
+```
