@@ -108,8 +108,8 @@ nginx config
 
 ```sh
 upstream server{
-  server 192.168.60.1:80        //主機A的位置
-  server 192.168.60.2:80        //主機B的位置
+  server 192.168.60.1:80;        //主機A的位置
+  server 192.168.60.2:80;        //主機B的位置
 }
 
 server{
