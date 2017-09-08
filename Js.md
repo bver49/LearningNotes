@@ -112,7 +112,8 @@ getPosts(function(posts){
 
 接著從then取得post的內容，如果在 then 中又 return 一個 promise 物件就可以繼續一直接著 then 下去
 
-```javascript
+```js
+
 var posts = [{
   user_id: '1',
   title: 'Post 1',
@@ -147,15 +148,18 @@ getPosts().then(function(posts){
   .then(function (users) {
     console.log(users);
   });
+  
 ```
 
 ## Template string
 
 在字串中插入變數，字串須使用｀包起來
 
-```javascript
+```js
+
 var num = 2;
 console.log(`Number ${ num }`); // Number 2
+
 ```
 
 ## Prototype
@@ -185,11 +189,11 @@ Person.prototype.say = function(){
 //產生一個為Person類別的實例
 var me = new Person("Derek");
 
-me.say();
+me.say();   //Hi my name is Derek
 
-me.__proto__ == Person.prototype; //true
-me.__proto__.__proto__ == Object.prototype; //true
-me instanceof Person;  //true
+me.__proto__ == Person.prototype;   //true
+me.__proto__.__proto__ == Object.prototype;   //true
+me instanceof Person;   //true
 
 ```
 
@@ -212,16 +216,16 @@ function Student(name){
 }
 
 //讓Student繼承Human
-Student.prototype = Human.prototype
+Student.prototype = Human.prototype;
 
 //或
-Student.prototype = Object.create(Human.prototype)
+Student.prototype = Object.create(Human.prototype);
 
 //建立一個Student實例
-var me = new Student("Derek")
+var me = new Student("Derek");
 
 //使用繼承自父類別的method
-me.introduce() //Hi my name is Derek
+me.introduce();   //Hi my name is Derek
 
 ```
 
@@ -251,7 +255,7 @@ me.introduce();
 
 ```
 
-ES6類似物件導向語言的class語法，基本的寫法：
+### ES6 Class
 
 ```js
 
@@ -268,7 +272,7 @@ class Person {
 
 var me = new Person("Derek");
 
-me.say(); //My name is Derek
+me.say();   //My name is Derek
 
 ```
 
@@ -281,7 +285,7 @@ class Person {
     this.name = name;
   }
   getA() {
-    return this.a
+    return this.a;
   }
 }
 
