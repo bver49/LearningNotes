@@ -35,3 +35,24 @@ docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image�
 docker rm $(docker ps -a -q)  #刪除所有container
  
 ```
+
+## Dockerfile 指令
+
+#設定映像檔的基底為ubuntu
+FROM  ubuntu:trusty
+
+#複製本地端檔案或資料夾到映像檔指定路徑中，可用ADD或COPY
+#用ADD的話若為壓縮檔 會自動解壓縮
+ADD ./demo  /
+
+#運行指令安裝套件等等
+RUN echo x
+  
+#為RUN、CMD、ENTRYPOINT指定目錄
+WORKDIR /tmp
+  
+#打開3000 PORT
+EXPOSE 3000
+  
+#容器啟動時運行的指令
+CMD ["command","params"]
