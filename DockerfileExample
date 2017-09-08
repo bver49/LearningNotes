@@ -1,4 +1,6 @@
-```
+-------------------
+dockerfile
+-------------------
 #Use nodev6.11.3
 FROM node:boron
 
@@ -19,9 +21,9 @@ EXPOSE 3000
 
 # Run npm start when container start
 CMD [ "npm", "start" ]
-```
 
+-------------------
 .dockerignore
-
+-------------------
 node_modules
 npm-debug.log
