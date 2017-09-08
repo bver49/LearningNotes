@@ -38,6 +38,7 @@ docker rm $(docker ps -a -q)  #刪除所有container
 
 ## Dockerfile 指令
 
+```
 #設定映像檔的基底為ubuntu
 
 FROM  ubuntu:trusty
@@ -61,3 +62,4 @@ EXPOSE 3000
 #容器啟動時運行的指令
 
 CMD ["command","params"]
+```
