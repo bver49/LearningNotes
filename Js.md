@@ -171,15 +171,18 @@ prototype 只存在於 constructor function ，
 ## Class
 
 ```js
+
 //建立一個類別叫Person，每個Person都有一個名字
 function Person(name){
     this.name = name;
 }
+
 //每個Person都有一個method可以打招呼
 Person.prototype.say = function(){
     console.log(`Hi my name is ${this.name}`);
 }
-//產生一個為Person類別的人
+
+//產生一個為Person類別的實例
 var me = new Person("Derek");
 
 me.say();
@@ -193,29 +196,37 @@ me instanceof Person;  //true
 ### 繼承
 
 ```js
-//建立一個類別為Student
-function Student(name){
-    this.name = name;
-}
-//建立一個類別為Human
+
+//建立一個父類別為Human
 function Human(){
 }
+
 //Human有一個method用來自我介紹
 Human.prototype.introduce = function(){
     console.log(`Hi my name is ${this.name}`);
 }
 
+//建立一個子類別為Student
+function Student(name){
+    this.name = name;
+}
+
 //讓Student繼承Human
 Student.prototype = Human.prototype
+
 //或
 Student.prototype = Object.create(Human.prototype)
+
 //建立一個Student實例
 var me = new Student("Derek")
 
-me.introduce()
+//使用繼承自父類別的method
+me.introduce() //Hi my name is Derek
+
 ```
 
 ```js
+
 //建立一個類別叫Student，每個Student都有一個名字跟自己的Skill
 function Student(name,skill){
     this.name = name;
@@ -228,19 +239,22 @@ var Human = {
         console.log(`Hi,my name is ${this.name}.I can write ${this.skill}!`);
     }
 }
+
 //讓Student這個類別繼承Human，使其能夠使用Human類別中的method
 Student.prototype = Object.create(Human);
 
 //建立一個Student實例
 var me = new Student("Derek","Javascript");
+
 //自我介紹
 me.introduce();
 
 ```
 
-類似物件導向語言的class語法，基本的寫法：
+ES6類似物件導向語言的class語法，基本的寫法：
 
-```javascript
+```js
+
 class Person {
   //constructor
   constructor(name) {
@@ -255,17 +269,22 @@ class Person {
 var me = new Person("Derek");
 
 me.say(); //My name is Derek
+
 ```
 
 繼承的做法：
 
-```javascript
+```js
+
 class Person {
   constructor(name) {
     this.name = name;
   }
-  getA() {return this.a}
+  getA() {
+    return this.a
+  }
 }
+
 class Student extends Person {
   constructor(name,grade) {
     super(name);
@@ -275,6 +294,42 @@ class Student extends Person {
     console.log("Hi my name is " + this.name + "\nI'm in " + this.grade + " grade!");
   }
 }
+
+```
+
+### 多型
+
+```js
+
+//父類別
+function Shape(w,l) {
+  this.width = w;
+  this.length = l;
+}
+
+//父類別 Method
+Shape.prototype.area = function() {
+    console.log("Area = "+ this.width * this.length);
+};
+
+//子類別
+function Cube(w,l,h) {
+  Shape.call(this,w,l);    //呼叫父類別 constructor
+  this.height = h;
+}
+
+//子類別繼承父類別
+Cube.prototype = Object.create(Shape.prototype);
+
+//子類別 Method
+Cube.prototype.volume = function(){
+    console.log("Volume = "+ (this.width * this.length * this.height));
+}
+
+//創建一個子類別物件
+var bigCube = new Cube(3,4,5);
+bigCube.volume();    //60
+
 ```
 
 ### 創建類別不用使用 new 的做法
