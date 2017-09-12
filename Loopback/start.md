@@ -28,36 +28,34 @@ lb model
 
 ```js
 module.exports = function(Model) {
-  Model.newmethod = function(params,cb) {
-    if(params){
-		cb(null, response);
-    }else{
-		cb(null, response);
+  Model.newmethod = function(params, cb) {
+    if (params) {
+      cb(null, response);
+    }
+    else {
+      cb(null, response);
     }
   };
 
   //擴展的method相關設定
-  Model.remoteMethod(
-    'newmethod',
-    {
+  Model.remoteMethod('newmethod', {
+    http: {
+      path: '/newmethod',
+      verb: 'get'
+    },
+        //接受的格式
+    accepts: {
+      arg: 'id',
+      type: 'string',
       http: {
-        path: '/newmethod',
-        verb: 'get'
-      },
-      //接受的格式
-      accepts: {
-        arg: 'id',
-		type: 'string', 
-		http: { 
-			source: 'query' 
-		} 
-      },
-      //回傳的類型
-      returns: {
-        arg: 'status',
-        type: 'string'
+        source: 'query'
       }
+    },
+    //回傳的類型
+    returns: {
+      arg: 'params',
+      type: 'string'
     }
-  );
+  });
 }
 ```
