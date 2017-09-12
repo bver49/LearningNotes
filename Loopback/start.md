@@ -36,10 +36,10 @@ module.exports = function(Model) {
 
   //擴展的method相關設定
   Model.remoteMethod(
-    ‘newmethod’,
+    'newmethod',
     {
       http: {
-        path: ‘/newmethod’,
+        path: '/newmethod',
         verb: 'get'
       },
       //回傳的類型
