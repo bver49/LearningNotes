@@ -26,7 +26,7 @@ docker run -d --name custom image command  #使用image 建立一個名字叫 cu
 
 docker run -it  image command   #使用image 建立一個container在前景啟動，啟動時執行command
 
-docker run -d  -v HostFolderPwd:/ContainerDirectory image  把主機的資料夾掛載到container中，讓container存入該資料夾的檔案可在主機上讀取
+docker run -d  -v HostFolderPwd:/ContainerDirectory image  #把主機的資料夾掛載到container中，讓container存入該資料夾的檔案可在主機上讀取
 
 docker rmi -f image  #移除image
 
@@ -48,13 +48,13 @@ docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image�
 
 docker rm $(docker ps -a -q)  #刪除所有container
 
-docker inspect -f {{.State.Running}}  container 確認container是否運行中
+docker inspect -f {{.State.Running}}  #container 確認container是否運行中
 
-docker logs container  查看container的log
+docker logs container  #查看container的log
 
-docker logs --follow container  查看container的log，log會即時更新
+docker logs --follow container  #查看container的log，log會即時更新
 
-docker port mysql	 查看容器port的配置
+docker port mysql	 #查看容器port的配置
  
 ```
 
