@@ -16,6 +16,8 @@ lb datasource
 
 若資料來源為database，基礎類別設定為 PersistedModel，建立好後基本的CRUD指令Loopback也都處理好了
 
+Model則是包裝成ORM的模式
+
 ```sh
 lb model		
 ```
@@ -41,6 +43,14 @@ module.exports = function(Model) {
       http: {
         path: '/newmethod',
         verb: 'get'
+      },
+      //接受的格式
+      accepts: {
+        arg: 'id', 
+	type: 'string', 
+	http: { 
+		source: 'query' 
+	} 
       },
       //回傳的類型
       returns: {
