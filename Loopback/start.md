@@ -46,7 +46,7 @@ module.exports = function(Model) {
       },
       //接受的格式
       accepts: {
-        arg: 'id', 
+        arg: 'id',
 		type: 'string', 
 		http: { 
 			source: 'query' 
