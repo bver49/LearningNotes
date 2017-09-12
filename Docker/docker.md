@@ -1,3 +1,15 @@
+## Docker安裝
+
+### Server
+
+``` sh
+curl -sSL https://get.docker.com | sudo sh
+```
+
+### Mac(OSX)
+
+下載 https://store.docker.com/editions/community/docker-ce-desktop-mac
+
 ## Docker指令
 
 用image來建立container跑起特定服務
@@ -35,6 +47,10 @@ docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image�
 docker rm $(docker ps -a -q)  #刪除所有container
 
 docker inspect -f {{.State.Running}}  container 確認container是否運行中
+
+docker logs container  查看container的log
+
+docker logs --follow container  查看container的log，log會即時更新
  
 ```
 
