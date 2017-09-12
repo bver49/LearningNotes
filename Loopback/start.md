@@ -30,9 +30,9 @@ lb model
 module.exports = function(Model) {
   Model.newmethod = function(params,cb) {
     if(params){
-  	  cb(null, response);
+		cb(null, response);
     }else{
-	    cb(null, response);
+		cb(null, response);
     }
   };
 
@@ -47,10 +47,10 @@ module.exports = function(Model) {
       //接受的格式
       accepts: {
         arg: 'id', 
-	type: 'string', 
-	http: { 
-		source: 'query' 
-	} 
+		type: 'string', 
+		http: { 
+			source: 'query' 
+		} 
       },
       //回傳的類型
       returns: {
