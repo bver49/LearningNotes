@@ -55,7 +55,17 @@ docker logs container  #查看container的log
 docker logs --follow container  #查看container的log，log會即時更新
 
 docker port mysql	 #查看容器port的配置
- 
+
+docker volume create  #建立一個volume，會回傳volumeid
+
+docker run -v /opt -d image  #建立一個container時自動創立一個volume掛載到container的/opt路徑下
+
+docker run -v volumeid:/opt -d image  #把已存在volume掛載到container的/opt路徑下，以後若移除這個container，還是可以透過把volume掛在新的container下volume中原有的檔案
+
+docker run -d  --name containerB --volumes-from containerA imager  #建立一個 containerB 並使用 containerA 的 volume
+
+docker inspect -f '{{.Mounts}}' container #查看某一個 container 的 volume 狀況
+
 ```
 
 ## Dockerfile 指令
