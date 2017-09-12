@@ -2,7 +2,7 @@ var Queue = require('bull');
 
 var countQueue = new Queue('counting', {
     redis: {
-        port: 32771,
+        port: REDIS_PORT,
         host: '127.0.0.1'
     },
     prefix: 'test' //prefix in redis
@@ -36,7 +36,7 @@ countQueue.on('progress', function(job, progress) {
 });
 
 countQueue.on('error', function(error) {
-    console.log('Error:' + error.failedReason);
+    console.log('Error:' + error);
 })
 
 //當job出錯
