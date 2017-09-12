@@ -81,6 +81,10 @@ ADD ./demo  /tmp
 
 COPY ./demo /tmp
 
+#創建一個Volume掛載到映像檔路徑下
+
+VOLUME /opt
+
 #運行指令安裝套件等等
 
 RUN echo x
