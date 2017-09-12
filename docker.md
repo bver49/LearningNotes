@@ -14,7 +14,7 @@ docker run -d --name custom image command  #使用image 建立一個名字叫 cu
 
 docker run -it  image command   #使用image 建立一個container在前景啟動，啟動時執行command
 
-docker rmi image  #移除image
+docker rmi -f image  #移除image
 
 docker rm -f container  #移除container
 
@@ -33,6 +33,8 @@ docker exec -it container bash  #進入container
 docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image一個name與tag
 
 docker rm $(docker ps -a -q)  #刪除所有container
+
+docker inspect -f {{.State.Running}}  container 確認container是否運行中
  
 ```
 
@@ -45,7 +47,9 @@ FROM  ubuntu:trusty
 
 #複製本地端檔案或資料夾到映像檔指定路徑中，可用ADD或COPY，用ADD的話若為壓縮檔 會自動解壓縮
 
-ADD ./demo  /
+ADD ./demo  /tmp
+
+COPY ./demo /tmp
 
 #運行指令安裝套件等等
 
