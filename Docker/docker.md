@@ -54,7 +54,7 @@ docker logs container  #查看container的log
 
 docker logs --follow container  #查看container的log，log會即時更新
 
-docker port mysql	 #查看容器port的配置
+docker port container	 #查看容器port的配置
 
 docker volume create  #建立一個volume，會回傳volumeid
 
