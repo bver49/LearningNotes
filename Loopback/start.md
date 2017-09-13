@@ -57,6 +57,13 @@ module.exports = function(Model) {
       http: {
         source: 'query'        //等同於express的query
     },
+    {
+      arg: 'body',
+      type: 'object',
+      http: {
+        source:'body'         //取得等同於expresse的req.body的內容，為一個object 
+      }
+    },
     { 
       arg: 'id',
       type: 'object',
