@@ -149,19 +149,29 @@ module.exports = function(Model) {
 
 ### 改寫預設CRUD路由
 
-直接將要改寫的內容寫在model.js或model.json即可
+直接將要改寫的內容寫在model.js即可
 
-例如要改寫原有的 GET /model/:id
+例如要改寫原有的 GET /model 
+
+#### 方法一
+
+先到 [Model API](https://loopback.io/doc/en/lb3/Exposing-models-over-REST.html) 查看原本的 GET /model 用的是哪一個method
+
+從文件可以看到 原有的 GET /model 對應到的method為find
 
 在 /models/model.js加入
 
 ```js
 module.exports = function(model) {
-  //寫一個新method
+  
+  model.disableRemoteMethod("find", true);       //先關掉Loopback預設的find method
+  
+  //寫一個新method
   model.newmethod = function(id, cb) {
     cb(null,"Override method");
   } 
-  //為這個method加入路由規則
+ 
+ //為這個新method加入路由規則
   model.remoteMethod('newmethod', {
     http: {
       path: '/:id',            //覆蓋掉原有的 GET /model/:id 路由規則
@@ -181,6 +191,24 @@ module.exports = function(model) {
   });
 };
 
+```
+
+#### 方法二
+
+改寫觸發的method
+
+在 /models/model.js加入
+
+```js
+module.exports = function(model) {
+  model.on('dataSourceAttached', function(obj){
+    var find = model.find;                          //改寫find method
+    model.find = function(filter, cb) {
+      // do somethig else
+      return find.apply(this, arguments);
+    };
+  });
+};
 ```
 
 ### Instance method
