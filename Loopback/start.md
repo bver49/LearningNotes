@@ -149,8 +149,6 @@ module.exports = function(Model) {
 
 ### 改寫預設CRUD路由
 
-直接將要改寫的內容寫在model.js即可
-
 例如要改寫原有的 GET /model 
 
 #### 方法一
