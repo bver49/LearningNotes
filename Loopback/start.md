@@ -24,12 +24,12 @@ lb model
 
 ## 擴展API
 
-在common/models/ModelName.js
+在/models/ModelName.js加入新method的內容以及路由規則
 
 ```js
 module.exports = function(Model) {
-  Model.newmethod = function(params, cb) {
-    if (params) {
+  Model.newmethod = function(id, cb) {
+    if (id) {
       cb(null, response);
     }
     else {
@@ -37,8 +37,8 @@ module.exports = function(Model) {
     }
   };
 
-  //擴展的method相關設定
-  Model.remoteMethod('newmethod', {
+  //擴展的method的路由規則
+  Model.remoteMethod('newmethod', {
     http: {
       path: '/newmethod',
       verb: 'get'
@@ -53,11 +53,58 @@ module.exports = function(Model) {
     },
     //回傳的類型
     returns: {
-      arg: 'params',
+      arg: 'returnvalue',
       type: 'string'
     }
   });
 }
+```
+
+也可以在 /models/model.json加入路由規則
+
+```js
+...
+  "methods": {
+    "newmethod": {
+      //接受的參數
+      "accepts": [{
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "http": { 
+            "source":"path"       //等同於express的params
+          }
+        },
+        {
+          "arg": "querystring",
+          "type": "string",
+          "http": { 
+            "source":"query"       //等同於express的query
+          }
+        },
+        {
+          "arg":"req",
+          "type":"object",
+          "http":{
+            "source":"req"         //等同於express的req
+          }
+        },
+        {
+          "arg":"res",
+          "type":"object",
+          "http":{
+            "source":"res"        //等同於express的res，可以在method中用res.send或res.render取代原有的callback做response
+          }
+        }
+      ],
+      //路由設定
+      "http": {
+        "verb": "GET",         
+        "path": "/newmethod/:id"       //若有要取得source為path的參數需要在http的path做設定
+      }
+    }
+  }
+...
 ```
 
 ## 設定靜態檔案路徑
@@ -74,7 +121,7 @@ module.exports = function(Model) {
 
 之後就可以在client資料夾中 加入 HTML、JS、CSS檔案
 
-## 擴充Route
+## 擴充Route && 加入Middleware
 
 在/boot/route.js 加入
 
