@@ -24,6 +24,8 @@ lb model
 
 ## 擴展API
 
+### Remote method
+
 在/models/ModelName.js加入新method的內容以及路由規則
 
 ```js
@@ -61,7 +63,7 @@ module.exports = function(Model) {
       arg: 'body',
       type: 'object',
       http: {
-        source:'body'         //取得等同於expresse的req.body的內容，為一個object 
+        source:'body'         //取得等同於expresse的req.body的內容，為一個object，只有在http post時能取得
       }
     },
     { 
@@ -113,6 +115,13 @@ module.exports = function(Model) {
             "source":"query"       //等同於express的query
           }
         },
+        {
+          "arg":"body",
+          "type":"object",
+          "http":{
+            "source":"body"        //取得等同於expresse的req.body的內容，為一個object，只有在http post時能取得
+          }
+        },
         {
           "arg":"req",
           "type":"object",
@@ -138,6 +147,69 @@ module.exports = function(Model) {
 ...
 ```
 
+### 改寫預設CRUD路由
+
+直接將要改寫的內容寫在model.js或model.json即可
+
+例如要改寫原有的 GET /model/:id
+
+在 /models/model.js加入
+
+```js
+module.exports = function(model) {
+  //寫一個新method
+  model.newmethod = function(id, cb) {
+    cb(null,"Override method");
+  } 
+  //為這個method加入路由規則
+  model.remoteMethod('newmethod', {
+    http: {
+      path: '/:id',            //覆蓋掉原有的 GET /model/:id 路由規則
+     verb: 'get'
+    },
+    accepts: [{                //設定參數從path來
+      arg: 'id',
+      type: 'string',
+      http: {
+        source: 'path'
+      }
+    }],
+    returns: {                //設定回傳格式
+      arg: 'returnvalue',
+      type: 'string'
+    }
+  });
+};
+
+```
+
+### Instance method
+
+假如有個model叫user
+
+在 /models/user.json加入
+
+```js
+...
+"methods": {
+  "prototype.getProfile": {
+  "accepts": [],
+  "returns": { 
+    "arg": "data", 
+    "type": "User"
+  },
+  "http": {
+    "verb": "get", 
+    "path": "/profile"
+  }
+}
+...
+```
+
+會長出這樣的路由 /user/:id/profile
+
+[Document](http://loopback.io/doc/en/lb3/Remote-methods.html)
+
 ## 設定靜態檔案路徑
 
 在 server/middleware.json 加入
@@ -152,7 +224,7 @@ module.exports = function(Model) {
 
 之後就可以在client資料夾中 加入 HTML、JS、CSS檔案
 
-## 擴充Route && 加入Middleware
+## 加入自訂Route && 加入Middleware
 
 在/boot/route.js 加入
 
@@ -214,4 +286,5 @@ app.use(function(req,res,next){
 });
 
 ```
+
 
