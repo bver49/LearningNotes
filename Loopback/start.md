@@ -40,17 +40,41 @@ module.exports = function(Model) {
   //擴展的method的路由規則
   Model.remoteMethod('newmethod', {
     http: {
-      path: '/newmethod',
+      path: '/newmethod/:id',
       verb: 'get'
     },
-        //接受的格式
-    accepts: {
+    //接受參數的格式
+    accepts: [{
       arg: 'id',
       type: 'string',
       http: {
-        source: 'query'
+        source: 'path'          //等同於express的params 
       }
     },
+    { 
+      arg: 'querystring',
+      type: 'string',
+      http: {
+        source: 'query'        //等同於express的query
+    },
+    { 
+      arg: 'id',
+      type: 'object',
+      http: {
+        source: 'req'          //等同於express的req
+    },
+    { 
+      arg: 'querystring',
+      type: 'object',
+      http: {
+        source: 'res'         //等同於express的res，可以在method中用res.send或res.render取代原有的callback做response
+    },{ 
+      arg: 'custom',
+      type: 'string',
+      http:function(ctx){            //透過req的資料自己處理參數內容
+        var req = ctx.req;      
+        return req.body.custom;
+    }],
     //回傳的類型
     returns: {
       arg: 'returnvalue',
@@ -60,7 +84,7 @@ module.exports = function(Model) {
 }
 ```
 
-也可以在 /models/model.json加入路由規則
+也可以在 /models/model.json加入路由規則，會被model.js中的路由規則設定覆蓋
 
 ```js
 ...
