@@ -48,10 +48,3 @@ countQueue.on('failed', function(error) {
 countQueue.on('completed', function(job, result) {
     console.log('Job complete');
 });
-
-module.exports = function count(x, y) {
-    countQueue.add({
-        x: x,
-        y: y
-    });
-}
