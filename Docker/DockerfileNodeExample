@@ -4,7 +4,7 @@ dockerfile
 #Use nodev6.11.3
 FROM node:boron
 
-# Create app directory
+# Defined app directory
 WORKDIR /usr/src/app
 
 # Copy app dependencies
