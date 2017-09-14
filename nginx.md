@@ -123,12 +123,14 @@ server{
 
 ## With cloudflare
 
-透過 cloudflare 幫忙做反向代理以及掛上 https，主要的架構如下
+透過 cloudflare 做反向代理以及掛上 https 時，其主要的架構如下
 
 ```     
        HTTP
        port 80
        HTTPS            HTTP         redirect
-       port 443         port 80      port 3000
+       port 443         port 80      to any port 
 client ----> cloudflare ---->  nginx ----> webapp
 ```
+若 cloudflare 有使用 always https 功能，在雲端主機上架 socket server 時 socket client 端必定要使用 https 連線
+
