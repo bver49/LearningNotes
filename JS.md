@@ -485,10 +485,27 @@ var Person = require("./Person");
 var me = new Person("Derek");
 ```
 
-## Express send staticfile
+## Express 
+
+### Send static file
 
 ```js
 res.sendFile(path.join(__dirname+'/index.html'));  
 res.sendFile("index.html",{root: __dirname });
 app.use("/",express.static(__dirname));
 ```
+
+### Error handle
+
+ ```js
+ // 500錯誤
+ app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
+
+// 404錯誤，要放在所有route的下方
+app.get('*', function(req, res, next) {
+  res.status(404).send('Page not found');
+});
+ ```
