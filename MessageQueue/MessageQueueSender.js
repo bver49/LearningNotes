@@ -8,6 +8,12 @@ var countQueue = new Queue('counting', {
     prefix: 'test' //prefix in redis
 });
 
-module.exports = function count(x, y) { 
-  countQueue.add({ x: x, y: y }); 
+module.exports = function count(x, y, id) { 
+  countQueue.add('jobname',{ 
+      x: x, 
+      y: y 
+  },{
+     jobId:id,        //custom jobid
+     timeout:30000    //limit job worktime 30sec
+  }); 
 }
