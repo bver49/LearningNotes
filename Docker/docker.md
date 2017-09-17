@@ -66,6 +66,8 @@ docker run -d  --name containerB --volumes-from containerA imager  #建立一個
 
 docker inspect -f '{{.Mounts}}' container #查看某一個 container 的 volume 狀況
 
+docker volume inspect 查看volume的狀況
+
 ```
 
 ## Dockerfile 指令
