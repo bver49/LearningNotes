@@ -38,7 +38,7 @@ docker run -d -p 80:5000 image  #用image啟動container時將host的80 port 對
 
 docker run -d -p 127.0.0.1:80:5000 image  #用image啟動container時將host的127.0.0.1:80 port 對應到container的5000 port
 
-docker run -d -P --name server --link db:linkalias image #用image建一個名字為server的container，並且連接名為db的container，並為這個link取一個別名
+docker run -d -P --name server --link db:linkalias image #用image建立名字為server的container，並且連接名為db的container，並為這個連結取一個別名
 
 docker start/stop container  #啟動/暫停 container
 
@@ -58,6 +58,8 @@ docker port container	 #查看容器port的配置
 
 docker volume create  #建立一個volume，會回傳volumeid
 
+docker volume inspect volumename #查看volume的狀況
+
 docker run -v /opt -d image  #建立一個container時自動創立一個volume掛載到container的/opt路徑下
 
 docker run -v volumeid:/opt -d image  #把已存在volume掛載到container的/opt路徑下，以後若移除這個container，還是可以透過把volume掛在新的container下volume中原有的檔案
@@ -66,7 +68,7 @@ docker run -d  --name containerB --volumes-from containerA imager  #建立一個
 
 docker inspect -f '{{.Mounts}}' container #查看某一個 container 的 volume 狀況
 
-docker volume inspect 查看volume的狀況
+docker container inspect -f '{{ range .Mounts }}{{ .Name }}:{{ .Destination }} {{ end }}' container #查看某一個 container 的 volume 狀況
 
 ```
 
