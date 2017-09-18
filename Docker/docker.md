@@ -89,11 +89,11 @@ COPY ./demo /tmp
 
 VOLUME /opt
 
-#運行指令安裝套件等等
+#運行終端指令安裝套件等等
 
 RUN echo x
   
-#為RUN、CMD、ENTRYPOINT指定目錄
+#切換RUN、CMD、ENTRYPOINT等指令執行的目錄
 
 WORKDIR /tmp
   
