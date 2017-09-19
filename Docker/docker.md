@@ -70,6 +70,8 @@ docker inspect -f '{{.Mounts}}' container #查看某一個 container 的 volume 
 
 docker container inspect -f '{{ range .Mounts }}{{ .Name }}:{{ .Destination }} {{ end }}' container #查看某一個 container 的 volume 狀況
 
+docker tag imageid newtag  為image重新取一個tag
+
 ```
 
 ## Dockerfile 指令
