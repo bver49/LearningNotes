@@ -134,6 +134,6 @@ client ----> cloudflare ---->  nginx ----> webapp
 ```
 若 cloudflare 有使用 always https 功能，在雲端主機上架 socket server 時 socket client 端必定要使用 https 連線
 
-若 server 上有架其他服務，要連上該服務要直接使用server的IP，例如server上port 3306 有架 mysql，遠端要連要使用，111.111.111.111:3306
+若 server(ec2) 上有架其他服務，要連上該服務要直接使用 server(ec2) 的IP，例如 server(ec2) 上 port 3306 有架 mysql，遠端要連要使用，111.111.111.111:3306，前提是 server(ec2) 端的 inbound rule 要設定好開啟的 port
 
 
