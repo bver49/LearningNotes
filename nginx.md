@@ -121,6 +121,26 @@ server{
 }
 ```
 
+## HTTP to HTTPS
+
+```sh
+server {
+  listen 80;
+
+  server_name domain.com;
+  return 301 https://domain.com;
+}
+
+server {
+  listen 443;
+
+  server_name domain.com;
+  location / {
+     proxy_pass http://127.0.0.1:3000;
+  }
+}
+```
+
 ## With cloudflare
 
 透過 cloudflare 做反向代理以及掛上 https 時，其主要的架構如下
