@@ -38,7 +38,7 @@ docker run -d -p 80:5000 image  #用image啟動container時將host的80 port 對
 
 docker run -d -p 127.0.0.1:80:5000 image  #用image啟動container時將host的127.0.0.1:80 port 對應到container的5000 port
 
-docker run -d -P --name server --link db:linkalias image #用image建立名字為server的container，並且連接名為db的container，並為這個連結取一個別名
+docker run -d -P --name server --link db:alias image #用image建立名字為server的container，並且連接名為db的container，並為這個連結取一個別名
 
 docker start/stop container  #啟動/暫停 container
 
@@ -72,6 +72,7 @@ docker container inspect -f '{{ range .Mounts }}{{ .Name }}:{{ .Destination }} {
 
 docker tag imageid newtag  為image重新取一個tag
 
+docker restart container  重啟container
 ```
 
 ## Dockerfile 指令
@@ -81,7 +82,15 @@ docker tag imageid newtag  為image重新取一個tag
 
 FROM  ubuntu:trusty
 
-#複製本地端檔案或資料夾到映像檔指定路徑中，可用ADD或COPY，用ADD的話若為壓縮檔 會自動解壓縮
+#是build時候可以從外部以--build-arg引入的變數 EX: docker build --build-arg SOME_VARIBLE=some_value .
+
+ARG SOME_VARIBLE
+
+#設定環境變數
+
+ENV NODE_ENV production 
+
+#複製本地端檔案或資料夾到映像檔指定路徑中，可用ADD或COPY，用ADD的話可為URL或壓縮檔，若為壓縮檔 會自動解壓縮
 
 ADD ./demo  /tmp
 
