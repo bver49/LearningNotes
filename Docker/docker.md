@@ -19,13 +19,13 @@ docker images  #查看現有的映像檔
 
 docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image一個name與tag
 
-docker tag imageid newtag  為image重新取一個tag
+docker tag imageid newtag  #為image重新取一個tag
 
 ```
 
 ## 容器
 
-```
+```sh
 
 docker ps #查看運行中的容器
 
@@ -49,7 +49,7 @@ docker exec -it container bash  #進入container
 
 ## 查看配置
 
-```
+```sh
 
 docker inspect -f {{.State.Running}}  #container 確認container是否運行中
 
@@ -63,7 +63,7 @@ docker port container	 #查看容器port的配置
 
 ## 刪除容器與映像檔
 
-```
+```sh
 
 docker rm -f container  #移除container
 
@@ -81,61 +81,17 @@ docker image prune -a #刪除所有images
 
 ```
 
-## Dockerfile 指令
-
-```
-
-#設定映像檔的基底為ubuntu
-
-FROM  ubuntu:trusty
-
-#是build時候可以從外部以--build-arg引入的變數 EX: docker build --build-arg SOME_VARIBLE=some_value .
-
-ARG SOME_VARIBLE
-
-#設定環境變數
-
-ENV NODE_ENV production 
-
-#複製本地端檔案或資料夾到映像檔指定路徑中，可用ADD或COPY，用ADD的話可為URL或壓縮檔，若為壓縮檔 會自動解壓縮
-
-ADD ./demo  /tmp
-
-COPY ./demo /tmp
-
-#執行run指令時會創建一個Volume掛載到容器/opt路徑下
-
-VOLUME /opt
-
-#運行終端指令安裝套件等等
-
-RUN echo x
-  
-#切換RUN、CMD、ENTRYPOINT等指令執行的目錄
-
-WORKDIR /tmp
-  
-#打開3000 PORT
-
-EXPOSE 3000
-  
-#容器啟動時運行的指令
-
-CMD ["command","params"]
-
-```
-
 ## Container 互連
 
 假設目前已有一個 container 叫 mysql，再來要開一個container叫server並讓server可以連到mysql，可用以下指令連接名為mysql的container
 
-```
+```sh
 docker run -d -P --name server --link mysql:db server_image 
 ```
 
 在 container server 內 host 使用 mysql 或 db 就可以連到 container mysql，可以用ping來做測試
 
-```
+```sh
 ping db
 ping mysql
 ```
@@ -146,13 +102,13 @@ ping mysql
 
 可以在dockerfile內指定路徑掛載匿名volume
 
-```
+```dockerfile
 VOLUME /container_path
 ```
 
 不過會被 docker run 的 -v 指令覆蓋，docker run 時可以用以下指令設定volume
 
-```
+```sh
 
 docker run -v /opt -d image  #建立一個container時自動創立一個volume掛載到container的/opt路徑下
 
@@ -166,7 +122,7 @@ docker run -d  --name containerB --volumes-from containerA imager  #建立一個
 
 要操作或創建volume可以用以下指令
 
-```
+```sh
 
 docker volume ls  #列出host上的所有volume
 
