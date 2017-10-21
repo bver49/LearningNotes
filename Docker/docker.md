@@ -145,7 +145,7 @@ docker volume ls  #列出host上的所有volume
 
 docker volume create  #建立一個volume，會回傳volumeid
 
-docker volume inspect volumename #查看volume的狀況
+docker volume inspect volumename #查看volume的狀況，EX：主機上的路徑、容器中的路徑
 
 docker inspect -f '{{.Mounts}}' container #查看某一個 container 的 volume 狀況
 
