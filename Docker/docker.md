@@ -10,9 +10,8 @@ curl -sSL https://get.docker.com | sudo sh
 
 下載 https://store.docker.com/editions/community/docker-ce-desktop-mac
 
-## Docker指令
 
-用image來建立container跑起特定服務
+## 映像檔
 
 ```sh
 
@@ -20,15 +19,17 @@ docker images  #查看現有的映像檔
 
 docker build -t  name:tag  .  #用dockerfile建立一份image，並給予image一個name與tag
 
+docker tag imageid newtag  為image重新取一個tag
+
+```
+
+## 容器
+
+```
+
 docker ps #查看運行中的容器
 
 docker ps -a #查看現有的容器，包含未運行的
-
-docker rmi -f image  #移除image
-
-docker rm -f container  #移除container
-
-docker rm $(docker ps -a -q)  #刪除所有container
 
 docker run -d --name custom image command  #使用image 建立一個名字叫 custom 的container在背景啟動，啟動時執行command
 
@@ -44,6 +45,12 @@ docker start/stop/restart container  #啟動/暫停/重啟 container
 
 docker exec -it container bash  #進入container
 
+```
+
+## 查看配置
+
+```
+
 docker inspect -f {{.State.Running}}  #container 確認container是否運行中
 
 docker logs container  #查看container的log
@@ -52,13 +59,32 @@ docker logs -f container  #查看container的log，log會即時更新
 
 docker port container	 #查看容器port的配置
 
-docker tag imageid newtag  為image重新取一個tag
+```
+
+## 刪除容器與映像檔
+
+```
+
+docker rm -f container  #移除container
+
+docker rmi -f image  #移除image
+
+docker rm -f $(docker ps -a -q)  #刪除所有container
+
+docker rmi -f $(docker images -q) #刪除所有images
+
+docker container prune #刪除所有未運行的container
+
+docker image prune #刪除所有未使用images
+
+docker image prune -a #刪除所有images
 
 ```
 
 ## Dockerfile 指令
 
 ```
+
 #設定映像檔的基底為ubuntu
 
 FROM  ubuntu:trusty
@@ -96,6 +122,7 @@ EXPOSE 3000
 #容器啟動時運行的指令
 
 CMD ["command","params"]
+
 ```
 
 ## Container 互連
