@@ -1,7 +1,7 @@
 Install gcc by binary file
 
-```
-wget http://mirror/gcc-6.1.0.tar.gz   
+```sh
+wget http://mirror/gcc-6.1.0.tar.gz   
 tar xzf gcc-6.1.0.tar.gz
 cd gcc-6.1.0
 ./contrib/download_prerequisites
@@ -13,7 +13,7 @@ make
 make install
 ```
 
-```
+```sh
 export CC='/home3/sixeigst/GCC-6.1.0/bin/gcc'
 export CXX='/home3/sixeigst/GCC-6.1.0/bin/g++'
 export LD_LIBRARY_PATH='/home3/sixeigst/GCC-6.1.0/lib64/:$LD_LIBRARY_PATH'
