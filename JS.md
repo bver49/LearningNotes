@@ -485,6 +485,17 @@ var Person = require("./Person");
 var me = new Person("Derek");
 ```
 
+## Console
+
+使用console來記錄運行時間
+
+```js
+console.time('flag');
+doSomething();
+console.timeEnd('flag');
+//flag: xxxxms
+```
+
 ## Express 
 
 ### Send static file
