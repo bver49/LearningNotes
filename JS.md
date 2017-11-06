@@ -26,11 +26,9 @@ console.log("Hi");
 
 ```json
 {
-  ...
   "bin": {
     "mycli": "./bin/mycli.js"
   }
-  ...
 }
 ```
 
@@ -70,9 +68,34 @@ mycli
 ```
 
 ## Promise
+
+### Resolve && Reject
+
+```javascript
+
+var someWork = new Promise(function(resolve,reject) {
+  // 成功時
+  resolve(value);
+  // 失敗時
+  reject(err);
+});
+
+someWork.then(function(value) {
+  // resolve發生時執行
+  console.log(value);
+}).catch(function (err){
+  // reject發生時執行
+  console.log(err);
+});
+
+```
+
+#### Example
+
 簡單的promise範例，模擬取得post在找到對應的user的情況，不使用promise的結果如下：
 
 ```javascript
+
 var posts = [{
   user_id: '1',
   title: 'Title',
@@ -102,6 +125,7 @@ getPosts(function(posts){
     console.log(users);
   });
 });
+
 ```
 
 這樣函數一多會形成 callback hell，所以改用 promise， promise 的作法如下，
@@ -126,7 +150,7 @@ var users = [{
 }]
 
 function getPosts() {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve,reject) {
     setTimeout(function () {
       resolve(posts);
     }, 1000);
@@ -134,7 +158,7 @@ function getPosts() {
 }
 
 function getUsers() {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve,reject) {
     setTimeout( function() {
       resolve(users);
     }, 1000);
@@ -147,8 +171,95 @@ getPosts().then(function(posts){
   })
   .then(function (users) {
     console.log(users);
+  }).catch(function(err){
+    console.log(err);
   });
-  
+
+```
+
+### Promise.all
+
+接受的參數為一個 promise array ， 會等到 array 內的 function 都執行完才到下一步
+
+```js
+
+var funcA = Promise.resolve(1),
+    funcB = Promise.resolve(2),
+    funcC = Promise.resolve(3);
+
+Promise.all([funcA, funcB, funcC]).then(function (results) {
+    console.log(results);  // [1, 2,3]
+}).catch(function(err) {
+  console.log(err);
+});
+
+```
+
+錯誤處理
+
+```js
+
+var funcA = Promise.resolve(1),
+    funcB = Promise.reject(2),
+    funcC = Promise.resolve(3);
+
+Promise.all([funcA, funcB, funcC]).then(function (results) {
+    // 因為發生reject 不會執行
+    console.log(results);
+}).catch(function(err) {
+  console.log(err); // 2
+});
+
+```
+
+## Async / Await
+
+類似於promise的用法，但可以不用使用 then
+
+node v7.0.0 以上已經內建，但v7.0.0的版本需要使用 flag harmony
+
+```sh
+node --harmony app.js
+```
+
+```js
+
+var posts = [{
+  user_id: '1',
+  title: 'Post 1',
+  content: 'fake content'
+}];
+
+var users = [{
+  id: '1',
+  name: 'Name'
+}]
+
+function getPosts() {
+  return new Promise(function (resolve,reject) {
+    setTimeout(function () {
+      resolve(posts);
+    }, 1000);
+  });
+}
+
+function getUsers() {
+  return new Promise(function (resolve,reject) {
+    setTimeout( function() {
+      resolve(users);
+    }, 1000);
+  });
+}
+
+async function main (){
+  var post = await getPosts();
+  console.log(posts);
+  var user = await getUsers();
+  console.log(user);
+}
+
+main();
+
 ```
 
 ## Template string
@@ -496,7 +607,7 @@ console.timeEnd('flag');
 //flag: xxxxms
 ```
 
-## Express 
+## Express
 
 ### Send static file
 
@@ -520,3 +631,98 @@ app.get('*', function(req, res, next) {
   res.status(404).send('Page not found');
 });
  ```
+
+## Call && Bind && Apply
+
+### Call
+
+可以改變 function 中的 this 物件
+
+```js
+var human = {  
+  name: "Derek",
+  say: function(hobby) {
+    console.log(`My name is ${this.name}. I like ${hobby}!`);
+  }
+}
+
+human.say("movies");  // "My name is Derek. I like movies!"
+human.say.call({ name:"John" },"coding"); // "My name is John. I like movies!"
+```
+
+### Apply
+
+和Call用法相似，可以改變 function 中的 this 物件，但傳遞的參數為array
+
+```js
+var human = {  
+  name: "Derek",
+  say: function(hobby) {
+    console.log(`My name is ${this.name}. I like ${hobby}!`);
+  }
+}
+
+human.say("movies");  // "My name is Derek. I like movies!"
+human.say.apply({ name:"John" },["coding"]); // "My name is John. I like movies!"
+```
+
+### Bind
+
+bind 創建了一個新的函數，使用者可以指定 function 中的 this 物件
+
+```js
+var human = {  
+  name: "Derek",
+  say: function(hobby) {
+    console.log(`My name is ${this.name}. I like ${hobby}!`);
+  }
+}
+
+var newFunc = human.say.bind({ name: "John" });
+
+human.say("movies");  // "My name is Derek. I like movies!"
+newFunc("coding") // "My name is John. I like coding!"
+```
+
+## Fetch
+
+為HTML5的API，與過去的 ajax 一樣被用來做發Request的工作
+
+### GET
+
+```js
+
+fetch('http://api.server',{
+  method: 'GET',
+  headers: new Headers({
+    'Content-Type': 'text/json'
+  })
+})  
+.then(function(response) {
+  //處理 response
+}).catch(function(err) {
+  //處理 error
+});
+
+```
+
+### POST
+
+```js
+
+fetch('http://api.server',{
+  method: 'POST',
+  headers: new Headers({
+    'Content-Type': 'text/json'
+  }),
+  body:{
+    data:"value"
+  }
+})  
+.then(function(response) {
+  //處理 response
+}).catch(function(err) {
+  //處理 error
+});
+
+```
