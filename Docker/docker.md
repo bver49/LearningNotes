@@ -6,9 +6,11 @@
 curl -sSL https://get.docker.com | sudo sh
 ```
 
+[可參考](http://rancher.com/docs/rancher/v1.6/en/hosts/#supported-docker-versions)
+
 ### Mac(OSX)
 
-下載 https://store.docker.com/editions/community/docker-ce-desktop-mac
+[下載](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
 
 ## 映像檔
