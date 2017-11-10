@@ -29,4 +29,6 @@ git stash       //將修改的內容暫存起來
 
 git stash pop      //把暫存的內容丟出來
 
+git branch -a  //列出所有分支，包含遠端分支跟本地分支
+
 ```
