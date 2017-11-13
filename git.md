@@ -8,6 +8,8 @@ git reset --soft HEAD^  //回到未commit的狀態，修改的內容還在，不
 
 git reset --hard HEAD^  //回到未commit的狀態，修改的內容會復原
 
+git commit --amend -m 'new comment'  //修改commit的說明
+
 
 Commit 前可以做的
 
