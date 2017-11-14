@@ -69,7 +69,7 @@ mycli
 
 ## Promise
 
-### Resolve && Reject
+### Promise物件基本使用
 
 ```javascript
 
@@ -174,6 +174,26 @@ getPosts().then(function(posts){
   }).catch(function(err){
     console.log(err);
   });
+
+```
+
+### Promise.resolve && Promise.reject
+
+```js
+
+function test(val) {
+  if(val){
+    return Promise.resolve("Success");
+  }else{
+    return Promise.reject("Fail");
+  }
+}
+
+test(1).then(function(result){
+  console.log(result); //當Resolve發生時執行,Success
+}).catch(function(err){
+  console.log(err)     //當Reject發生時執行,Fail
+})
 
 ```
 
