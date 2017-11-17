@@ -781,3 +781,23 @@ fetch('http://api.server',{
 });
 
 ```
+
+## Events
+
+```js
+
+var EventEmitter = require('events').EventEmitter;
+var event = new EventEmitter();
+
+event.on('eventA', function(arg1, arg2) {
+  console.log(`eventA ${arg1} ${arg2}`);
+});
+
+event.on('eventB',function() {
+  console.log('eventB');
+});
+
+event.emit('eventA', 'arg1', 'arg2');
+event.emit('eventB');
+
+```
