@@ -801,3 +801,56 @@ event.emit('eventA', 'arg1', 'arg2');
 event.emit('eventB');
 
 ```
+
+## Process
+
+### Event
+
+```js
+
+//程式結束時觸發
+process.on('exit',function(code) => {
+  console.log("Process done");
+});
+//錯誤發生時觸發
+process.on('uncaughtException', (err) => {
+  console.log("Something wrong");
+});
+```
+
+### exec && spawn
+
+#### Sync
+
+```js
+
+var execSync = require('child_process').execSync;
+
+var child = execSync('node -v');
+
+//Print command output
+console.log(child.stdout.toString());
+
+```
+
+#### Async
+
+```js
+
+var spawn = require('child_process').spawn;
+
+var child = spawn('node',["-v"]);
+
+child.stdout.on('data', function(data) {
+  console.log(data);
+});
+
+child.stderr.on('data', function(err) {
+  console.log(err);
+});
+
+child.on('close', function(code) {
+  console.log(code);
+});
+
+```
