@@ -232,6 +232,8 @@ Promise.all([funcA, funcB, funcC]).then(function (results) {
 
 ```
 
+重複使用同樣的函數
+
 ```js
 
 var id = ['A', 'B', 'C'];
