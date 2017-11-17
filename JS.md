@@ -232,6 +232,39 @@ Promise.all([funcA, funcB, funcC]).then(function (results) {
 
 ```
 
+```js
+
+var id = ['A', 'B', 'C'];
+var data = {
+  'A': [
+    'A1',
+    'A2'
+  ],
+  'B': [
+    'B1',
+    'B2'
+  ],
+  'C': [
+    'C1'
+  ]
+}
+
+function getData(id) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve(data[id]);
+    }, 3000);
+  });
+}
+
+var getAll = Promise.all(id.map(getData));
+
+getAll.then(function(val) {
+  console.log(val);
+})
+
+```
+
 ## Async / Await
 
 類似於promise的用法，但可以不用使用 then
