@@ -854,3 +854,34 @@ child.on('close', function(code) {
 });
 
 ```
+
+### NPX
+
+過去要使用某些套件，需要透過npm全域安裝才能使用，使用npx指令就可以不用事先安裝就可以執行命令
+
+#### npm > 5.2
+
+已內建
+
+#### npm < 5.2
+
+自行安裝
+
+```sh
+npm install -g npx
+```
+
+#### Example
+
+過去要使用bower
+
+```sh
+npm install -g bower
+bower install
+```
+
+有了 npx
+
+```sh
+npx bower install
+```
