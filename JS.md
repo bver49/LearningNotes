@@ -824,12 +824,24 @@ process.on('uncaughtException', (err) => {
 
 ```js
 
+var spawnSync = require('child_process').spawnSync;
+
+var child = spawnSync('node',['-v']);
+
+//Print command output
+console.log(child.stdout.toString());
+console.log(child.stderr.toString());
+
+```
+
+```js
+
 var execSync = require('child_process').execSync;
 
 var child = execSync('node -v');
 
 //Print command output
-console.log(child.stdout.toString());
+console.log(child.toString());
 
 ```
 
@@ -840,6 +852,26 @@ console.log(child.stdout.toString());
 var spawn = require('child_process').spawn;
 
 var child = spawn('node',["-v"]);
+
+child.stdout.on('data', function(data) {
+  console.log(data.toString());
+});
+
+child.stderr.on('data', function(err) {
+  console.log(err);
+});
+
+child.on('close', function(code) {
+  console.log(code);
+});
+
+```
+
+```js
+
+var exec = require('child_process').exec;
+
+var child = exec('node -v');
 
 child.stdout.on('data', function(data) {
   console.log(data);
