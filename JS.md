@@ -871,18 +871,13 @@ child.on('close', function(code) {
 
 var exec = require('child_process').exec;
 
-var child = exec('node -v');
-
-child.stdout.on('data', function(data) {
-  console.log(data);
-});
-
-child.stderr.on('data', function(err) {
-  console.log(err);
-});
-
-child.on('close', function(code) {
-  console.log(code);
+exec('node -v',function(error, stdout, stderr){
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
 });
 
 ```
