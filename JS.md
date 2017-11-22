@@ -851,7 +851,7 @@ console.log(child.toString());
 
 var spawn = require('child_process').spawn;
 
-var child = spawn('node',["-v"]);
+var child = spawn('node',['-v']);
 
 child.stdout.on('data', function(data) {
   console.log(data.toString());
