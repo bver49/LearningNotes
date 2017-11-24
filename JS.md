@@ -815,6 +815,8 @@ fetch('http://api.server',{
 
 ## Events
 
+### Basic
+
 ```js
 
 var EventEmitter = require('events').EventEmitter;
@@ -830,6 +832,45 @@ event.on('eventB',function() {
 
 event.emit('eventA', 'arg1', 'arg2');
 event.emit('eventB');
+
+```
+
+### Use EventEmitter with custom class
+
+#### ES5
+
+```js
+
+var EventEmitter = require("events").EventEmitter;
+
+function Human() {
+  EventEmitter.call(this);
+}
+
+Human.prototype = Object.create(EventEmitter.prototype);
+
+Human.prototype.say = function(word) {
+  this.emit("say");
+  console.log(word);
+}
+
+```
+
+#### ES6
+
+```js
+
+var EventEmitter = require("events").EventEmitter;
+
+class Human extends EventEmitter{
+  constructor(){
+    super();
+  }
+
+  say(data){
+    this.emit("say");
+  }
+}
 
 ```
 
@@ -941,4 +982,30 @@ bower install
 
 ```sh
 npx bower install
+```
+
+### Proxy
+
+ES6 新有的功能，用於在操作物件時多一層處理
+
+```js
+
+var data = new Proxy({}, {
+  get: function (target, key, receiver) {
+    console.log("Read data!");
+    return Reflect.get(target, key, receiver);
+  },
+  set: function (target, key, value, receiver) {
+    console.log("Set data!");
+    return Reflect.set(target, key, value, receiver);
+  }
+});
+
+data["name"]="Derek";
+//Set data!
+
+console.log(data.name);
+//Derek
+//Read data!
+
 ```
