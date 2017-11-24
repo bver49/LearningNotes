@@ -345,6 +345,10 @@ prototype 只存在於 constructor function ，
 //建立一個類別叫Person，每個Person都有一個名字
 function Person(name){
     this.name = name;
+    var privateValue = "Some Value"
+    var privateMethod = function() {
+      //Do something
+    }
 }
 
 //每個Person都有一個method可以打招呼
@@ -369,29 +373,59 @@ me instanceof Person;   //true
 
 //建立一個父類別為Human
 function Human(){
+  this.say = function() {
+    console.log("I am a human!");
+  }
 }
 
 //Human有一個method用來自我介紹
 Human.prototype.introduce = function(){
-    console.log(`Hi my name is ${this.name}`);
+  console.log(`Hi my name is ${this.name}`);
 }
 
 //建立一個子類別為Student
 function Student(name){
-    this.name = name;
+  this.name = name;
 }
 
 //讓Student繼承Human
 Student.prototype = Human.prototype;
-
-//或
-Student.prototype = Object.create(Human.prototype);
 
 //建立一個Student實例
 var me = new Student("Derek");
 
 //使用繼承自父類別的method
 me.introduce();   //Hi my name is Derek
+me.say();  //say() is not a function
+
+```
+
+```js
+
+//建立一個父類別為Human
+function Human(){
+  //Human有一個method用來自我介紹
+  this.introduce = function(){
+    console.log(`Hi my name is ${this.name}`);
+  }
+}
+
+Human.prototype.say = function() {
+  console.log("I am a human!");
+}
+
+//建立一個子類別為Student
+function Student(name){
+  Human.call(this);   //讓Student繼承Human
+  this.name = name;
+}
+
+//建立一個Student實例
+var me = new Student("Derek");
+
+//使用繼承自父類別的method
+me.introduce();   //Hi my name is Derek
+me.say();        //say() is not a function
 
 ```
 
@@ -479,7 +513,7 @@ function Shape(w,l) {
 
 //父類別 Method
 Shape.prototype.area = function() {
-    console.log("Area = "+ this.width * this.length);
+  console.log("Area = "+ this.width * this.length);
 };
 
 //子類別
@@ -488,12 +522,9 @@ function Cube(w,l,h) {
   this.height = h;
 }
 
-//子類別繼承父類別
-Cube.prototype = Object.create(Shape.prototype);
-
 //子類別 Method
 Cube.prototype.volume = function(){
-    console.log("Volume = "+ (this.width * this.length * this.height));
+  console.log("Volume = "+ (this.width * this.length * this.height));
 }
 
 //創建一個子類別物件
