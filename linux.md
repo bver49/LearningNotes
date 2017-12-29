@@ -84,4 +84,10 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 ## Check port usage
 
+#### Check specific port usage
+
 `lsof -i :3000 | grep LISTEN`
+
+#### List port usage
+
+`lsof -PiTCP -sTCP:LISTEN`
