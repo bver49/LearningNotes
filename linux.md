@@ -75,3 +75,13 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 
 `scp -r localfolder username@serverhost:/foldername`
+
+## traceroute
+
+#### 調查連接到某部主機時，經過的每個節點以及連線速度 
+
+`traceroute google.com`
+
+## Check port usage
+
+`lsof -i tcp:3000`
