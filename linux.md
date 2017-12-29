@@ -91,3 +91,11 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 #### List port usage
 
 `lsof -PiTCP -sTCP:LISTEN`
+
+`netstat -aep | grep ':\*'`
+
+### Check remote host port usage
+
+`nc -vz example.com.or.ip 80`
+
+`telnet example.com.or.ip 80`
