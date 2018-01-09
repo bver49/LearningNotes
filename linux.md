@@ -99,3 +99,33 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 `nc -vz example.com.or.ip 80`
 
 `telnet example.com.or.ip 80`
+
+## Edit
+
+### Create file
+
+`touch filename`
+
+### Show file content
+
+`cat filename`
+
+### Append string into file
+
+`cat >> filename`
+
+## Disk
+
+### Check disk usage
+
+`df -h`
+
+### Check file size in the directory
+
+`du -hmd 1`
+
+### Check sum of filesize in the directory
+
+`du -sh`
+
+
