@@ -94,6 +94,8 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 `netstat -aep | grep ':\*'`
 
+`netstat -ltunp`
+
 ### Check remote host port usage
 
 `nc -vz example.com.or.ip 80`
