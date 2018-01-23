@@ -1,10 +1,12 @@
-## iptables
+## Network
 
-### Show rules
+### Iptables
+
+#### Show rules
 
 `iptables -L -n`
 
-### Create rules
+#### Create rules
 
 ```sh
 -i 封包所進入的網路介面，EX: eth0、lo
@@ -18,7 +20,7 @@
 
 ```
 
-### Reset iptables
+#### Reset iptables
 
 Create file in `/etc/network/if-pre-up.d/iptables`
 
@@ -50,7 +52,7 @@ iptables -A INPUT -j DROP
 
 Then reboot
 
-### Other
+#### Other
 
 ```sh
 
@@ -60,6 +62,40 @@ iptables -P FORWARD [ACCEPT|DROP]
 iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 ```
+
+### Traceroute
+
+#### 調查連接到某部主機時，經過的每個節點以及連線速度 
+
+`traceroute google.com`
+
+### Check port usage
+
+#### Check specific port usage
+
+`lsof -i :3000 | grep LISTEN`
+
+#### List port usage
+
+`lsof -PiTCP -sTCP:LISTEN`
+
+`netstat -aep | grep ':\*'`
+
+`netstat -ltunp`
+
+#### Check remote host port usage
+
+`nc -vz example.com.or.ip 80`
+
+`telnet example.com.or.ip 80`
+
+### Check DNS record
+
+`nslookup example.com`
+
+`dig example.com`
+
+`host example.com`
 
 ## scp
 
@@ -76,31 +112,11 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 `scp -r localfolder username@serverhost:/foldername`
 
-## traceroute
+## Grep
 
-#### 調查連接到某部主機時，經過的每個節點以及連線速度 
+### Find keyword by command result
 
-`traceroute google.com`
-
-## Check port usage
-
-#### Check specific port usage
-
-`lsof -i :3000 | grep LISTEN`
-
-#### List port usage
-
-`lsof -PiTCP -sTCP:LISTEN`
-
-`netstat -aep | grep ':\*'`
-
-`netstat -ltunp`
-
-### Check remote host port usage
-
-`nc -vz example.com.or.ip 80`
-
-`telnet example.com.or.ip 80`
+`some command | grep 'keyword'`
 
 ## Edit
 
@@ -129,5 +145,18 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 ### Check sum of filesize in the directory
 
 `du -sh`
+
+## Process
+
+### Check process
+
+`ps aux`
+
+`top`
+
+### Kill process
+
+`kill -9 PID`
+
 
 
