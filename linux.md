@@ -114,9 +114,13 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 ## Grep
 
+### Find keyword in file
+
+`grep keyword filename`
+
 ### Find keyword by command result
 
-`some command | grep 'keyword'`
+`some command | keyword`
 
 ## Edit
 
