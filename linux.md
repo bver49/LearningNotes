@@ -39,9 +39,10 @@ Create rules file `iptables.firewall.rules` in `/etc`
 -A INPUT -p tcp --dport 443 -j ACCEPT
 
 # Allow all traffic from localhost
+-A INPUT -i lo -j ACCEPT
 -A INPUT -p tcp -s 127.0.0.1 -j ACCEPT
 
-# SSH (replace 22 with the port you use)
+# SSH
 -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # Drop all others
@@ -63,18 +64,7 @@ iptables-restore < /etc/iptables.firewall.rules
 
 `sudo chmod +x /etc/network/if-pre-up.d/firewall`
 
-Then reboot
-
-#### Other
-
-```sh
-
-iptables -P INPUT   [ACCEPT|DROP]    
-iptables -P OUTPUT  [ACCEPT|DROP]  
-iptables -P FORWARD [ACCEPT|DROP]  
-iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
-
-```
+`sudo iptables-restore < /etc/iptables.firewall.rules`
 
 ### Traceroute
 
