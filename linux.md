@@ -6,6 +6,10 @@
 
 `iptables -L -n`
 
+#### Clean rules
+
+`iptables -F`
+
 #### Create rules
 
 ```sh
@@ -22,33 +26,42 @@
 
 #### Reset iptables
 
-Create file in `/etc/network/if-pre-up.d/iptables`
+Create rules file `iptables.firewall.rules` in `/etc`
+
+```sh
+*filter
+
+-A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+-A OUTPUT -j ACCEPT
+
+# Web
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow all traffic from localhost
+-A INPUT -p tcp -s 127.0.0.1 -j ACCEPT
+
+# SSH (replace 22 with the port you use)
+-A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Drop all others
+-A INPUT -j DROP
+-A FORWARD -j DROP
+
+COMMIT
+
+```
+
+Create file `firewall` in `/etc/network/if-pre-up.d`
 
 ```sh
 
 #!/bin/sh
-
-# Reset iptables rules
-iptables -F
-
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-
-# localhost
-iptables -A INPUT -s 127.0.0.1 -p tcp -j ACCEPT
-
-# Web
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-
-# SSH
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-
-# Drop others
-iptables -A INPUT -j DROP
+iptables-restore < /etc/iptables.firewall.rules
 
 ```
 
-`sudo chmod +x /etc/network/if-pre-up.d/iptables`
+`sudo chmod +x /etc/network/if-pre-up.d/firewall`
 
 Then reboot
 
