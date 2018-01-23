@@ -120,7 +120,7 @@ iptables -A INPUT -i lo -j [ACCEPT|DROP|REJECT|LOG]
 
 ### Find keyword by command result
 
-`some command | keyword`
+`some command | grep keyword`
 
 ## Edit
 
