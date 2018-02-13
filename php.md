@@ -1,3 +1,24 @@
+## Variable
+
+### Global
+
+```php
+$x = 1;
+$y = 2;
+
+function test1(){
+  global $x,$y;
+  echo $x+$y;
+}
+
+function test2(){
+  echo $GLOBALS["x"]+$GLOBALS["y"];
+}
+
+test1(); //3
+test2(); //3
+```
+
 ## Class
 
 ### Basic
