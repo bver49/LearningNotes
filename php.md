@@ -1,3 +1,49 @@
+## Class
+
+### Basic
+
+```php
+class Human {
+  protected $name;
+  function __construct($name){
+    $this->name = $name;
+  }
+  function greeting(){
+    echo "Hi my name is $this->name!\n";
+  }
+}
+
+$derek = new Human("Derek");
+$derek->greeting(); //Hi my name is Derek!
+```
+
+### Inherit
+
+```php
+class Human {
+  protected $name;
+  function __construct($name){
+    $this->name = $name;
+  }
+  function greeting(){
+    echo "Hi my name is $this->name!\n";
+  }
+}
+
+class Adult extends Human{ 
+  protected $job; 
+  function __construct($name,$job){
+    parent::__construct($name); //Use parent constructor
+    $this->job = $job;
+  }
+  function greeting(){
+    echo "Hi my name is $this->name!\nI am an $this->job!\n";
+  }
+}
+$derek = new Adult("Derek","enginner");
+$derek->greeting();
+```
+
 ## MySQL
 
 ### Query
