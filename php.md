@@ -89,7 +89,10 @@ $stmt->bind_param("i", $id);
 
 $id = 1;
 $stmt->execute();
-$data = $stmt->get_result()->fetch_all(); // $data = $stmt->get_result()->fetch_array();
+$data = $stmt->get_result()->fetch_all();
+// $data = $stmt->get_result()->fetch_array();
+// $data = $stmt->get_result()->fetch_row();
+// $data = $stmt->get_result()->fetch_assoc();
 
 $mysqli->close();
 ```
