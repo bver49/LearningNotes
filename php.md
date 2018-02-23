@@ -80,6 +80,8 @@ $mysqli->close();
 
 ### Prepare statement
 
+#### MySQLi
+
 ```php
 $mysqli = new mysqli("host", "user", "pw", "db");
 $mysqli->set_charset ('utf8');
@@ -95,4 +97,29 @@ $data = $stmt->get_result()->fetch_all();
 // $data = $stmt->get_result()->fetch_assoc();
 
 $mysqli->close();
+```
+
+#### PDO
+
+```php
+$servername = "host";
+$username = "user";
+$password = "pw";
+$dbname = "db";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $conn->prepare("SELECT * from user where id = :id;");
+    $stmt->bindParam(':id', $id);
+
+    $id = 1;
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    print_r($data);
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+$conn = null;
 ```
