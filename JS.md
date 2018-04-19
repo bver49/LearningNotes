@@ -261,6 +261,12 @@ function getData(id) {
 
 var getAll = Promise.all(id.map(getData));
 
+/* Or
+var getAll = Promise.all(id.map(function(ele){
+  return getData(ele);
+})); 
+*/
+
 getAll.then(function(val) {
   console.log(val);
 })
