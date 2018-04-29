@@ -15,7 +15,7 @@ new Vue({
   },
   watch:{    //監控data中的資料變化，並做出後續的動作
   }
-  ready:function(){     //vue instance 建立好後執行，把ajax取得資料語法寫在這
+  mounted:function(){     //vue instance 建立好後執行，把ajax取得資料語法寫在這
   }
 });
 ```
