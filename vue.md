@@ -387,7 +387,7 @@ new Vue({
 ```html
 <div id="app">
   <p v-if="show==1">One</p>
-  <p v-else-id="show==2">Two</p>
+  <p v-else-if="show==2">Two</p>
   <p v-else>Three</p>
   <input type="text" v-model="show">
 </div>
