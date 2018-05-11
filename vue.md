@@ -301,6 +301,84 @@ new Vue({
 </div>
 ```
 
+## Condition
+
+### v-if、v-else、v-else-if
+
+在HTML tag 上加入 v-if 內容為一個條件，若條件為true則顯示若為false則不顯示
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    show:true  
+  }
+});
+```
+
+```html
+<div id="app">
+  <p v-if="show">See</p>
+  <p v-else>Cant see</p>
+  <div v-on:click="show=!show">Hide</div>
+</div>
+```
+
+也可以使用else if
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    show:1  
+  }
+});
+```
+
+```html
+<div id="app">
+  <p v-if="show==1">One</p>
+  <p v-else-if="show==2">Two</p>
+  <p v-else>Three</p>
+  <input type="text" v-model="show">
+</div>
+```
+
+## Loop
+
+使用 v-for 可以將 data 中的資料用迴圈做處理
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    todos:[{
+      'id':1,
+      'content':'some thing',
+      'done': true
+    },{
+      'id':2,
+      'content':'some thing2',
+      'done': false
+    }]  
+  }
+});
+```
+
+```html
+<div id="app">
+  <template v-for='(todo, index) in todos'>
+    <p v-if="todo.done == false">{{ todo.id }} {{ todo.content }}</p> <!-- 將 todolist 中未完成的事項列出來 -->
+  </template>
+</div>
+```
+
+## Bind
+
+```
+待補充
+```
+
 ## Dynamic CSS
 
 ### By object
@@ -403,74 +481,3 @@ new Vue({
 }
 ```
 
-## Condition
-
-### v-if、v-else、v-else-if
-
-在HTML tag 上加入 v-if 內容為一個條件，若條件為true則顯示若為false則不顯示
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    show:true  
-  }
-});
-```
-
-```html
-<div id="app">
-  <p v-if="show">See</p>
-  <p v-else>Cant see</p>
-  <div v-on:click="show=!show">Hide</div>
-</div>
-```
-
-也可以使用else if
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    show:1  
-  }
-});
-```
-
-```html
-<div id="app">
-  <p v-if="show==1">One</p>
-  <p v-else-if="show==2">Two</p>
-  <p v-else>Three</p>
-  <input type="text" v-model="show">
-</div>
-```
-
-## Loop
-
-使用 v-for 可以將 data 中的資料用迴圈做處理
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    todos:[{
-      'id':1,
-      'content':'some thing',
-      'done': true
-    },{
-      'id':2,
-      'content':'some thing2',
-      'done': false
-    }]  
-  }
-});
-```
-
-```html
-<div id="app">
-  <template v-for='(todo, index) in todos'>
-    <p v-if="todo.done == false">{{ todo.id }} {{ todo.content }}</p> <!-- 將 todolist 中未完成的事項列出來 -->
-  </template>
-</div>
-```
