@@ -14,7 +14,7 @@ new Vue({
   computed:{   //類似method，用於將data部分的資料先經過邏輯運算處理，只有相關的資料有變動到才執行
   },
   watch:{    //監控data中的資料變化，並做出後續的動作
-  }
+  },
   mounted:function(){     //vue instance 建立好後執行，把ajax取得資料語法寫在這
   }
 });
