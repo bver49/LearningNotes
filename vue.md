@@ -75,6 +75,68 @@ new Vue({
 </div>
 ```
 
+#### Access Data
+
+取得 vue instance 中 data 內容的方式有兩種
+
+在 vue instance 當中可以直接使用 this
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    count: 0
+  },
+  methods:{    
+    add: function(){
+      this.count++;         //透過 this 改變 data 中的值
+    }
+  }
+});
+```
+
+以外的地方，可以先將 vue instance 綁在一變數上，再直接由變數取得
+
+```javascript
+var vuePart = new Vue({        //將vue instance 綁在一個變數上
+  el:"#app",
+  data:{
+    count: 0
+  },
+  methods:{    
+  }
+});
+
+console.log(vuePart.count);  // 0
+vuePart.count++;
+console.log(vuePart.count); // 1
+
+```
+
+### Mounted
+
+vue instance 一建立起來就會執行的部分，可以將從後端 api 撈取資料的部分寫在這 
+
+```
+var postList = new Vue({       
+  el:"#app",
+  data:{
+    posts: []
+  },
+  mounted:{
+    //發ajax到後端拿資料
+    $.ajax({   
+      url: "https://api/getPost",
+      type: "GET",
+      success: function(posts){
+        //將取得的資料存到 vue instance 中，再來可以用 v-for 把資料印出來等等
+        postList.posts = posts;
+      }
+    });
+  }
+});
+```
+
 ### Method
 
 這個區塊能使用的一些function，需搭配 v-on 綁定在 dom 上
@@ -124,7 +186,7 @@ new Vue({
 
 ### Watch
 
-watch的數值有更動的時候就會執行
+監控的數值有更動的時候就會執行
 
 ```javascript
 new Vue({
@@ -145,6 +207,12 @@ new Vue({
   <div v-on:click="count++">Increase</div> <!-- 每次按下點擊改變 count 的時候就會輸出一次 "Count"-->
   <p>{{ count }}</p> <!-- 1 --> 
 </div>
+```
+
+### Filter
+
+```
+//待補充
 ```
 
 ## Event listening
