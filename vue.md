@@ -139,7 +139,7 @@ var postList = new Vue({      
 
 ### Method
 
-這個區塊能使用的一些function，需搭配 v-on 綁定在 dom 上
+這個區塊能使用的一些 function，需搭配 v-on 綁定在 dom 上
 
 ```javascript
 new Vue({
@@ -160,62 +160,7 @@ new Vue({
 </div>
 ```
 
-### Computed
-
-將data部分的資料先經過邏輯運算處理，只有相關的資料有變動才重新計算
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    message:"!olleH"
-  },
-  computed:{
-    reverseMessage:function(){
-      return this.message.split("").reverse().join("");
-    }
-  }
-});
-```
-
-```html
-<div id="app">
-  <p>{{ reverseMessage }}</p> <!-- Hello! -->
-</div>
-```
-
-### Watch
-
-監控的數值有更動的時候就會執行
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    count:0
-  },
-  watch:{
-    count:function(){   //名稱需與watch的數值一致
-      console.log("Count");
-    }
-  }
-});
-```
-
-```html
-<div id="app">
-  <div v-on:click="count++">Increase</div> <!-- 每次按下點擊改變 count 的時候就會輸出一次 "Count"-->
-  <p>{{ count }}</p> <!-- 1 --> 
-</div>
-```
-
-### Filter
-
-```
-//待補充
-```
-
-## Event listening
+#### Event listening (v-on)
 
 在HTML上加上v-on屬性並加上監聽的事件以及要執行的method名稱，事件的名稱如同原生的JS事件名稱，使用方法如下：
 
@@ -282,7 +227,85 @@ new Vue({
 </div>
 ```
 
-## Model
+若是點擊事件可以直接使用 @click
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    count:0     
+  },
+  methods:{
+    increase:function(){
+      this.count++;        //透過 this 來 access data中的資料
+    }
+  }
+});
+```
+
+```html
+<div id="app">
+  <div @click="increase">Increase</div> <!-- 點擊按鈕就會執行 methods中的函數 increase -->
+  <p>{{ count }}</p>
+</div>
+```
+
+### Computed
+
+將data部分的資料先經過邏輯運算處理，只有相關的資料有變動才重新計算
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    message:"!olleH"
+  },
+  computed:{
+    reverseMessage:function(){
+      return this.message.split("").reverse().join("");
+    }
+  }
+});
+```
+
+```html
+<div id="app">
+  <p>{{ reverseMessage }}</p> <!-- Hello! -->
+</div>
+```
+
+### Watch
+
+監控的數值有更動的時候就會執行
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    count:0
+  },
+  watch:{
+    count:function(){   //名稱需與watch的數值一致
+      console.log("Count");
+    }
+  }
+});
+```
+
+```html
+<div id="app">
+  <div v-on:click="count++">Increase</div> <!-- 每次按下點擊改變 count 的時候就會輸出一次 "Count"-->
+  <p>{{ count }}</p> <!-- 1 --> 
+</div>
+```
+
+### Filter
+
+```
+//待補充
+```
+
+## Two way data binding (v-model)
 
 ```javascript
 new Vue({
@@ -301,9 +324,7 @@ new Vue({
 </div>
 ```
 
-## Condition
-
-### v-if、v-else、v-else-if
+## Condition (v-if、v-else、v-else-if)
 
 在HTML tag 上加入 v-if 內容為一個條件，若條件為true則顯示若為false則不顯示
 
@@ -344,7 +365,7 @@ new Vue({
 </div>
 ```
 
-## Loop
+## Loop (v-for)
 
 使用 v-for 可以將 data 中的資料用迴圈做處理
 
@@ -373,7 +394,7 @@ new Vue({
 </div>
 ```
 
-## Bind
+## Bind (v-bind)
 
 ```
 待補充
