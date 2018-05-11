@@ -285,9 +285,9 @@ new Vue({
     count:0
   },
   watch:{
-    count:function(){   //名稱需與watch的數值一致
-      console.log("Count");
-    }
+    count: function(nowCountValue){   //名稱需與watch的數值一致
+      console.log(nowCountValue);     //改變後的資料數值
+    }
   }
 });
 ```
@@ -299,7 +299,7 @@ new Vue({
 </div>
 ```
 
-### Filter
+### Filters
 
 ```
 //待補充
