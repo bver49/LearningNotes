@@ -11,10 +11,12 @@ new Vue({
   },
   methods:{    //這個區塊能使用的一些function
   },
-  computed:{   //類似method，用於將data部分的資料先經過邏輯運算處理，只有相關的資料有變動到才執行
-  },
-  watch:{    //監控data中的資料變化，並做出後續的動作
-  },
+  computed:{   //將data中的資料作轉換
+  },
+  watch:{    //data中的資料變化時會觸發
+  },
+  filter:{   //資料格式的轉換
+  },
   mounted:function(){     //vue instance 建立好後執行，把ajax取得資料語法寫在這
   }
 });
@@ -73,26 +75,9 @@ new Vue({
 </div>
 ```
 
-若是data包含HTML tag的內容要使用v-html，如下：
-
-```javascript
-new Vue({
-  el:"#app",
-  data:{
-    link:"<a href='http://google.com'>Google</a>"    
-  }
-});
-```
-
-```html
-<div id="app">
-  <p v-html="link"></p> <!-- Show an a tag -->
-</div>
-```
-
 ### Method
 
-這個區塊能使用的一些function，不管有沒有相關的資料變動，每次重新渲染都會執行一次，
+這個區塊能使用的一些function，需搭配 v-on 綁定在 dom 上
 
 ```javascript
 new Vue({
@@ -101,31 +86,31 @@ new Vue({
   },
   methods:{    
     sayHello: function(){
-      return "Hello";
-    }
+      alert('Hi');  
+    }
   }
 });
 ```
 
 ```html
 <div id="app">
-  <p>{{ sayHello() }}</p> <!-- Hello -->
+  <a v-on:click="sayHello">打招呼</a>  <!-- 按下後跳出 alert -->
 </div>
 ```
 
 ### Computed
 
-類似method，用於將data部分的資料先經過邏輯運算處理，只有相關的資料有變動到才執行
+將data部分的資料先經過邏輯運算處理，只有相關的資料有變動才重新計算
 
 ```javascript
 new Vue({
   el:"#app",
   data:{
-    count:0
+    message:"!olleH"
   },
   computed:{
-    plusCount:function(){
-      return this.count+=1;
+    reverseMessage:function(){
+      return this.message.split("").reverse().join("");
     }
   }
 });
@@ -133,7 +118,7 @@ new Vue({
 
 ```html
 <div id="app">
-  <p>{{ plusCount }}</p> <!-- 1 -->
+  <p>{{ reverseMessage }}</p> <!-- Hello! -->
 </div>
 ```
 
@@ -157,8 +142,8 @@ new Vue({
 
 ```html
 <div id="app">
-  <div v-on:click="count++">Increase</div>
-  <p>{{ count }}</p> <!-- 1 -->
+  <div v-on:click="count++">Increase</div> <!-- 每次按下點擊改變 count 的時候就會輸出一次 "Count"-->
+  <p>{{ count }}</p> <!-- 1 --> 
 </div>
 ```
 
@@ -243,7 +228,7 @@ new Vue({
 ```html
 <!-- 1 -->
 <div id="app">
-  <input type="text" v-model="name"> <!-- 輸入的欄位內容改變 同時也會改變下方的name的值 -->
+  <input type="text" v-model="name"> <!-- 輸入的欄位內容改變 同時會改變date中name得值也會改變下方顯示的內容 -->
   <p>{{ name }}</p>
 </div>
 ```
@@ -338,7 +323,7 @@ new Vue({
 ```html
 <div id="app">
   <div class="demo" v-bind:style="myClass"></div>
-  <!-- style="background=red" -->
+  <!-- style="background:red" -->
 </div>
 ```
 
@@ -390,5 +375,34 @@ new Vue({
   <p v-else-if="show==2">Two</p>
   <p v-else>Three</p>
   <input type="text" v-model="show">
+</div>
+```
+
+## Loop
+
+使用 v-for 可以將 data 中的資料用迴圈做處理
+
+```javascript
+new Vue({
+  el:"#app",
+  data:{
+    todos:[{
+      'id':1,
+      'content':'some thing',
+      'done': true
+    },{
+      'id':2,
+      'content':'some thing2',
+      'done': false
+    }]  
+  }
+});
+```
+
+```html
+<div id="app">
+  <template v-for='(todo, index) in todos'>
+    <p v-if="todo.done == false">{{ todo.id }} {{ todo.content }}</p> <!-- 將 todolist 中未完成的事項列出來 -->
+  </template>
 </div>
 ```
