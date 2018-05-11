@@ -117,7 +117,7 @@ console.log(vuePart.count); // 1
 
 vue instance 一建立起來就會執行的部分，可以將從後端 api 撈取資料的部分寫在這 
 
-```
+```javascript
 var postList = new Vue({       
   el:"#app",
   data:{
