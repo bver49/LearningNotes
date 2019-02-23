@@ -25,7 +25,7 @@ docker tag imageid newtag  #為image重新取一個tag
 
 ```
 
-## 容器
+## 啟動容器
 
 ```sh
 
@@ -35,17 +35,19 @@ docker ps -a #查看現有的容器，包含未運行的
 
 docker run -d --name custom image command  #使用image 建立一個名字叫 custom 的container在背景啟動，啟動時執行command
 
-docker run -it  image command   #使用image 建立一個container在前景啟動，啟動時執行command
+docker run -it image command   #使用image 建立一個container在前景啟動，啟動時執行command
 
 docker run -d -P image  #用image啟動container時自動連接container跟host的port EX：自動分配host上的 3000 port 對應container的 5000port
 
 docker run -d -p 80:5000 image  #用image啟動container時將host的80 port 對應到container的5000 port
 
-docker run -d -p 127.0.0.1:80:5000 image  #用image啟動container時將host的127.0.0.1:80 port 對應到container的5000 port
+docker run -e TZ='Asia/Taipei' image  #用image啟動container時設定環境變數TZ，指定容器內的時區，也可設定其他環境變數
 
-docker start/stop/restart container  #啟動/暫停/重啟 container
+docker start|stop|restart container  #啟動|暫停|重啟 container
 
-docker exec -it container bash  #進入container
+docker exec -it container bash|sh  #進入container
+
+docker exec -it container sh -c "other command" #在容器內執行指定的 command
 
 ```
 
