@@ -85,19 +85,12 @@ docker image prune -a #刪除所有images
 
 ```
 
-## Container 互連
+## Link Container
 
 假設目前已有一個 container 叫 mysql，再來要開一個container叫server並讓server可以連到mysql，可用以下指令連接名為mysql的container
 
 ```sh
-docker run -d -P --name server --link mysql:db server_image 
-```
-
-在 container server 內 host 使用 mysql 或 db 就可以連到 container mysql，可以用ping來做測試
-
-```sh
-ping db
-ping mysql
+docker run -d -P --name server --link mysql:alias server
 ```
 
 可以在 /etc/hosts 這個檔案內看到相關的網路設定
