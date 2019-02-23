@@ -87,11 +87,33 @@ docker image prune -a #刪除所有images
 
 ## Link Container
 
-假設目前已有一個 container 叫 mysql，再來要開一個container叫server並讓server可以連到mysql，可用以下指令連接名為mysql的container
+### 情境一
+
+假設目前已有一個 container 叫 mysql，再來要開一個 container 叫 server 並讓 server 可以連到 mysql，可用以下指令連接名為 mysql 的 container
 
 ```sh
 docker run -d -P --name server --link mysql:alias server
 ```
+
+### 情境二
+
+假設目前已有一個 container 叫 mysql 另一個 container 叫 server，接著要讓 server 可以連到 mysql
+
+```sh
+docker network create bridge
+```
+
+把兩個 container 連上這個 bridge 網路
+
+```sh
+docker network connect bridge mysql
+```
+
+```sh
+docker network connect bridge server
+```
+
+
 
 可以在 /etc/hosts 這個檔案內看到相關的網路設定
 
