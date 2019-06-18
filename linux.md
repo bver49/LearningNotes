@@ -165,5 +165,15 @@ iptables-restore < /etc/iptables.firewall.rules
 
 `kill -9 PID`
 
+## SSH
+
+### Gen ssh key
+
+ssh-keygen
+
+### Send ssh key to remote server
+
+ssh-copy-id username@host
+
 
 
