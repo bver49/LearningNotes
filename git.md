@@ -35,8 +35,10 @@ git branch -a  //列出所有分支，包含遠端分支跟本地分支
 
 git rebase -i HEAD~N  //可以重新調整最近的N個分支，可以重新排序 Commit 或是合併 Commit
 
-Revert
+Revert merge request
 
-git revert <mergeCommitHash> -m 1 //revert 掉 merge request
+git revert HEAD 
+
+git revert -m 1 <SHA>
 
 ```
