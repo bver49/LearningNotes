@@ -175,5 +175,9 @@ ssh-keygen
 
 ssh-copy-id username@host
 
+## Timezone
+
+ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+
 
 
