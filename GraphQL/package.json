@@ -19,6 +19,6 @@
     "graphql": "^0.9.1",
     "mysql": "^2.13.0",
     "nodemon": "^1.9.2",
-    "sequelize": "^3.30.4"
+    "sequelize": "^6.3.5"
   }
 }
